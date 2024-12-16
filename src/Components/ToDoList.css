@@ -1,0 +1,269 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.nav-bar {
+    background-color: rgb(6, 145, 145);
+    padding: 50px 35px;
+    display: flex;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    font-size: 50px;
+    color: #ffffff;
+}
+
+
+h1 {
+    color: #ffffff;
+    font-size: 35px;
+}
+
+p {
+    font-weight: bold;
+}
+
+
+.container {
+    background-color: rgb(252, 180, 219);
+    padding: 20px 25px;
+    max-width: 1000px;
+    border-radius: 15px;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    scale: 85%;
+}
+
+.subtitle {
+    font-family: 'Londrina Outline', cursive;
+    font-size: 4rem;
+    color: #ff6f61;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    margin: 30px 0;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+.js-name-input,
+.js-date-input,
+.js-time-input,
+.js-category-input,
+.js-priority-input,
+.js-add-button,
+.js-cancel-button {
+    font-size: 15px;
+    padding: 10px 7px;
+    /*Added*/
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+
+.js-date-input:hover,
+.js-time-input:hover {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.js-add-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    row-gap: 1rem;
+    background-color: transparent;
+    padding: 20px;
+    border-radius: 8px;
+    /*Added*/
+}
+
+.js-actions-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    grid-row: auto;
+    grid-column: auto;
+}
+
+.js-add-button,
+.js-cancel-button {
+    background-color: green;
+    color: white;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.js-add-button:hover {
+    background-color: darkgreen;
+}
+
+.js-cancel-button {
+    background-color: #ff0000;
+}
+
+.js-cancel-button:hover {
+    background-color: #8b0000;
+}
+
+
+
+@media screen and (max-width: 768px) {
+
+    /* Navbar adjustments for mobile */
+    .nav-bar {
+        flex-direction: column;
+        /* Stack items vertically */
+        align-items: center;
+        text-align: center;
+        padding: 15px 10px;
+        /* Reduced padding */
+    }
+
+    .logo {
+        font-size: 30px;
+        /* Adjusted logo size for mobile */
+        margin-bottom: 10px;
+    }
+
+    h1 {
+        font-size: 25px;
+        /* Smaller header for mobile */
+    }
+
+    p {
+        font-size: 14px;
+        /* Reduced paragraph size */
+    }
+
+    /* Container adjustments */
+    .container {
+        max-width: 90%;
+        /* Container width for smaller screens */
+        padding: 15px 10px;
+        /* Adjust padding for better spacing */
+        /* Reduced top margin for compact layout */
+    }
+
+    /* Subtitle styling for smaller screens */
+    .subtitle {
+        font-size: 2.5rem;
+        /* Adjust subtitle size */
+    }
+
+    /* Input and button grid adjustments */
+    .js-add-grid {
+        grid-template-columns: 1fr;
+        /* Single-column layout */
+        gap: 10px;
+        /* Reduced gap between items */
+    }
+
+    .js-name-input,
+    .js-date-input,
+    .js-time-input,
+    .js-category-input,
+    .js-priority-input {
+        font-size: 14px;
+        /* Adjust font size for mobile */
+        padding: 8px 6px;
+        /* Compact padding */
+    }
+
+    /* Actions wrapper adjustments */
+    .js-actions-wrapper {
+        flex-direction: column;
+        /* Stack buttons vertically */
+        gap: 0.5rem;
+    }
+
+    .js-add-button,
+    .js-cancel-button {
+        width: 100%;
+        /* Full-width buttons for mobile */
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    /* Navbar adjustments for very small screens */
+    .nav-bar {
+        padding: 10px 5px;
+        /* Further reduced padding */
+    }
+
+    .logo {
+        font-size: 25px;
+        /* Smaller logo for narrow screens */
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    p {
+        font-size: 12px;
+    }
+
+    /* Container adjustments */
+    .container {
+        padding: 10px;
+        /* Compact padding */
+        max-width: 95%;
+    }
+
+    .subtitle {
+        font-size: 2rem;
+        /* Smaller subtitle font */
+    }
+
+    /* Input field adjustments for narrow screens */
+    .js-name-input,
+    .js-date-input,
+    .js-time-input,
+    .js-category-input,
+    .js-priority-input {
+        font-size: 12px;
+        /* Compact font size */
+        padding: 6px 4px;
+    }
+
+    .js-add-grid {
+        gap: 35px;
+        /* Further reduced gap */
+    }
+
+    .js-actions-wrapper {
+        gap: 0.3rem;
+    }
+}
