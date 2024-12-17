@@ -9,6 +9,9 @@ function App() {
 
   const [taskData, setTaskData] = useState([]);
 
+
+  //Add Task
+
   const addTask = (data) => {
     setTaskData((prevTasks) => [...prevTasks, data]);
 
