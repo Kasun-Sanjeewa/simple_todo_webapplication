@@ -1,12 +1,56 @@
-import React from 'react';
 import './ToDoList.css'
+import { useState, useEffect } from 'react';
 
-export default function TodoList() {
+export default function TodoList({ addTask }) {
+
+    const [task, setTast] = useState('');
+    const [selectedDate, setSelectedDate] = useState('');
+    const [selectedTime, setSelectedTime] = useState('');
+    const [selectCatogory, setSelectCatogory] = useState('')
+    const [selectPriority, setSelectPriority] = useState('')
+
+
+    useEffect(() => {
+        const currentData = new Date().toISOString().split('T')[0];
+        setSelectedDate(currentData)
+    }, [])
+
+
+    useEffect(() => {
+        const currentTime = new Date().toTimeString().split(' ')[0].substring(0, 5);
+        setSelectedTime(currentTime);
+    }, []);
+
+
+
+    const taskHandle = (event) => {
+        setTast(event.target.value)
+    }
+
+
+    const handleDateChange = (event) => {
+        setSelectedDate(event.target.value);
+    }
+
+    const handleTimeChange = (event) => {
+        setSelectedTime(event.target.value);
+    };
+
+
+    const handleCatogory = (event) => {
+        setSelectCatogory(event.target.value);
+    }
+
+    const handlePriority = (event) => {
+        setSelectPriority(event.target.value);
+    }
+
+
     return (
         <>
             <div className='nav-bar'>
                 <div className='logo'>
-                    <i class="fa-solid fa-clipboard-list" />
+                    <i className="fa-solid fa-clipboard-list" />
                 </div>
                 <div>
                     <h1>ToDo List</h1>
@@ -15,32 +59,48 @@ export default function TodoList() {
             </div>
             <h1 className="subtitle">Todo-List</h1>
 
-            <div class="container">
-                <div class="js-add-grid" id="add-todo">
+            <div className="container">
+                <div className="js-add-grid" id="add-todo">
                     <input
-                        type="text"
+                        type='text'
+                        id='task' name='task' value={task}
                         placeholder="Add a new task here...."
-                        class="js-name-input"
+                        className="js-name-input"
+                        onChange={taskHandle}
                     />
 
-                    <input type="date" class="js-date-input" min="" />
-                    <input type="time" class="js-time-input" />
-                    <select class="js-category-input">
+                    <input type="date" className="js-date-input" value={selectedDate} onChange={handleDateChange} />
+                    <input type="time" className="js-time-input" value={selectedTime} onChange={handleTimeChange} />
+                    <select className="js-category-input" value={selectCatogory} onChange={handleCatogory}>
                         <option value="">Select Category</option>
                         <option value="work">Work</option>
                         <option value="personal">Personal</option>
                         <option value="shopping">Shopping</option>
                         <option value="other">Other</option>
                     </select>
-                    <select class="js-priority-input">
+                    <select className="js-priority-input" value={selectPriority} onChange={handlePriority}>
                         <option value="">Select Priority</option>
                         <option value="high">High</option>
                         <option value="medium">Medium</option>
                         <option value="low">Low</option>
                     </select>
-                    <div class="js-actions-wrapper">
-                        <button class="js-add-button" title="Add tasks">
-                            <i class="fa-solid fa-add"></i> &nbsp; Add tasks
+                    <div className="js-actions-wrapper">
+                        <button className="js-add-button" title="Add tasks" onClick={() => {
+                            addTask(
+                                {
+                                    task,
+                                    selectedDate,
+                                    selectedTime,
+                                    selectCatogory,
+                                    selectPriority
+                                }
+                            );
+
+                            setTast('');
+                            setSelectCatogory('');
+                            setSelectPriority('');
+                        }}>
+                            <i className="fa-solid fa-add"></i> &nbsp; Add tasks
                         </button>
 
                     </div>
