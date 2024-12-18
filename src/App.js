@@ -3,17 +3,36 @@ import axios from 'axios';
 import './App.css';
 import Task from './Components/Task';
 import TodoList from './Components/TodoList';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
 
-  const [taskData, setTaskData] = useState([]);
+
+  const [taskData, setTask] = useState([]);
+
+  //getTask
+
+  useEffect(() => {
+    getTask();
+  }, []);
+
+  const getTask = () => {
+    axios.get('http://localhost:3001/api/getTask')
+      .then(Response => {
+        setTask(Response.data.response);
+      })
+      .catch(err => {
+        console.error("Axios Error : ", err);
+      })
+  }
+
+
 
 
   //Add Task
 
   const addTask = (data) => {
-    setTaskData((prevTasks) => [...prevTasks, data]);
+
 
     const payload = {
       task: data.task,
