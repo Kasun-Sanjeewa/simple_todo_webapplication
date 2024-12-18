@@ -1,13 +1,24 @@
 import './ToDoList.css'
 import { useState, useEffect } from 'react';
 
-export default function TodoList({ addTask }) {
+export default function TodoList({ addTask, selectData, isEdit, updateTask }) {
 
     const [task, setTast] = useState('');
     const [selectedDate, setSelectedDate] = useState('');
     const [selectedTime, setSelectedTime] = useState('');
     const [selectCatogory, setSelectCatogory] = useState('')
     const [selectPriority, setSelectPriority] = useState('')
+
+    var _id = selectData._id;
+    useEffect(() => {
+        if (selectData && selectData.id && selectData.id !== 0) {
+            setTast(selectData.task);
+            setSelectedDate(selectData.date);
+            setSelectedTime(selectData.time);
+            setSelectCatogory(selectData.catogory);
+            setSelectPriority(selectData.priority)
+        }
+    }, [selectData]);
 
 
     useEffect(() => {
@@ -86,21 +97,33 @@ export default function TodoList({ addTask }) {
                     </select>
                     <div className="js-actions-wrapper">
                         <button className="js-add-button" title="Add tasks" onClick={() => {
-                            addTask(
+                            isEdit ? updateTask(
                                 {
+                                    _id,
+                                    selectData: _id,
                                     task,
                                     selectedDate,
                                     selectedTime,
                                     selectCatogory,
                                     selectPriority
                                 }
-                            );
+                            ) :
+
+                                addTask(
+                                    {
+                                        task,
+                                        selectedDate,
+                                        selectedTime,
+                                        selectCatogory,
+                                        selectPriority
+                                    }
+                                );
 
                             setTast('');
                             setSelectCatogory('');
                             setSelectPriority('');
                         }}>
-                            <i className="fa-solid fa-add"></i> &nbsp; Add tasks
+                            <i className="fa-solid fa-add"></i>  &nbsp; {isEdit ? "Ugdate" : "Add Task"}
                         </button>
 
                     </div>

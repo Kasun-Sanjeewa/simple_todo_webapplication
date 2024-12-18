@@ -9,6 +9,8 @@ function App() {
 
 
   const [taskData, setTask] = useState([]);
+  const [selectData, setData] = useState({})
+  const [isEdit, setIsEdit] = useState(false);
 
   //getTask
 
@@ -33,7 +35,7 @@ function App() {
 
   const addTask = (data) => {
 
-
+    setIsEdit(true);
     const payload = {
       task: data.task,
       date: data.selectedDate,
@@ -45,6 +47,7 @@ function App() {
     axios.post('http://localhost:3001/api//addTask', payload)
       .then(() => {
         window.alert("Task Added")
+        getTask();
       })
       .catch(err => {
         console.error("Axios Error : ", err);
@@ -52,12 +55,44 @@ function App() {
   }
 
 
+  //Update USer
+
+  const updateTask = (dataa) => {
+
+    setIsEdit(true);
+
+
+    const payload = {
+      _id: dataa._id,
+      task: dataa.task,
+      date: dataa.selectedDate,
+      time: dataa.selectedTime,
+      catogory: dataa.selectCatogory,
+      priority: dataa.selectPriority,
+    }
+
+    axios.put('http://localhost:3001/api/updateTask', payload)
+      .then(() => {
+        getTask();
+        setIsEdit(false)
+
+      })
+      .catch(err => {
+        console.error("Axios Error : ", err);
+      })
+  }
+
+
+
   return (
     <div>
-      <TodoList addTask={addTask} />
-      <Task taskData={taskData} />
+      <TodoList addTask={addTask} selectData={selectData} isEdit={isEdit} updateTask={updateTask} />
+      <Task taskData={taskData} data={data => {
+        setData(data);
+        setIsEdit(true);
+      }} />
     </div>
   );
 }
 
-export default App;
+export default App; 

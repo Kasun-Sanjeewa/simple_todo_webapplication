@@ -139,7 +139,7 @@ p {
 
 
 .task-list {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 10px auto;
 }
 
@@ -175,7 +175,7 @@ p {
     border-radius: 5px;
     outline: none;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    width: 500px;
 }
 
 
@@ -212,6 +212,8 @@ p {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 
 }
+
+
 
 
 
