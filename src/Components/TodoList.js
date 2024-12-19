@@ -13,10 +13,11 @@ export default function TodoList({ addTask, selectData, isEdit, updateTask }) {
     useEffect(() => {
         if (selectData && selectData.id && selectData.id !== 0) {
             setTast(selectData.task);
-            setSelectedDate(selectData.date);
+            const formattedDate = new Date(selectData.date).toISOString().split('T')[0];
+            setSelectedDate(formattedDate);
             setSelectedTime(selectData.time);
             setSelectCatogory(selectData.catogory);
-            setSelectPriority(selectData.priority)
+            setSelectPriority(selectData.priority);
         }
     }, [selectData]);
 
@@ -30,6 +31,7 @@ export default function TodoList({ addTask, selectData, isEdit, updateTask }) {
     useEffect(() => {
         const currentTime = new Date().toTimeString().split(' ')[0].substring(0, 5);
         setSelectedTime(currentTime);
+
     }, []);
 
 
@@ -59,73 +61,75 @@ export default function TodoList({ addTask, selectData, isEdit, updateTask }) {
 
     return (
         <>
-            <div className='nav-bar'>
-                <div className='logo'>
-                    <i className="fa-solid fa-clipboard-list" />
+            <div className='main-container'>
+                <div className='nav-bar'>
+                    <div className='logo'>
+                        <i className="fa-solid fa-clipboard-list" />
+                    </div>
+                    <div>
+                        <h1>ToDo List</h1>
+                        <p>Execute Your Plan here</p>
+                    </div>
                 </div>
-                <div>
-                    <h1>ToDo List</h1>
-                    <p>Execute Your Plan here</p>
-                </div>
-            </div>
-            <h1 className="subtitle">Todo-List</h1>
+                <h1 className="subtitle">Todo-List</h1>
 
-            <div className="container">
-                <div className="js-add-grid" id="add-todo">
-                    <input
-                        type='text'
-                        id='task' name='task' value={task}
-                        placeholder="Add a new task here...."
-                        className="js-name-input"
-                        onChange={taskHandle}
-                    />
+                <div className="container">
+                    <div className="js-add-grid" id="add-todo">
+                        <input
+                            type='text'
+                            id='task' name='task' value={task}
+                            placeholder="Add a new task here...."
+                            className="js-name-input"
+                            onChange={taskHandle}
+                        />
 
-                    <input type="date" className="js-date-input" value={selectedDate} onChange={handleDateChange} />
-                    <input type="time" className="js-time-input" value={selectedTime} onChange={handleTimeChange} />
-                    <select className="js-category-input" value={selectCatogory} onChange={handleCatogory}>
-                        <option value="">Select Category</option>
-                        <option value="work">Work</option>
-                        <option value="personal">Personal</option>
-                        <option value="shopping">Shopping</option>
-                        <option value="other">Other</option>
-                    </select>
-                    <select className="js-priority-input" value={selectPriority} onChange={handlePriority}>
-                        <option value="">Select Priority</option>
-                        <option value="high">High</option>
-                        <option value="medium">Medium</option>
-                        <option value="low">Low</option>
-                    </select>
-                    <div className="js-actions-wrapper">
-                        <button className="js-add-button" title="Add tasks" onClick={() => {
-                            isEdit ? updateTask(
-                                {
-                                    _id,
-                                    selectData: _id,
-                                    task,
-                                    selectedDate,
-                                    selectedTime,
-                                    selectCatogory,
-                                    selectPriority
-                                }
-                            ) :
-
-                                addTask(
+                        <input type="date" className="js-date-input" value={selectedDate} onChange={handleDateChange} />
+                        <input type="time" className="js-time-input" value={selectedTime} onChange={handleTimeChange} />
+                        <select className="js-category-input" value={selectCatogory} onChange={handleCatogory}>
+                            <option value="">Select Category</option>
+                            <option value="work">Work</option>
+                            <option value="personal">Personal</option>
+                            <option value="shopping">Shopping</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <select className="js-priority-input" value={selectPriority} onChange={handlePriority}>
+                            <option value="">Select Priority</option>
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                        <div className="js-actions-wrapper">
+                            <button className="js-add-button" title="Add tasks" onClick={() => {
+                                isEdit ? updateTask(
                                     {
+                                        _id,
+                                        selectData: _id,
                                         task,
                                         selectedDate,
                                         selectedTime,
                                         selectCatogory,
                                         selectPriority
                                     }
-                                );
+                                ) :
 
-                            setTast('');
-                            setSelectCatogory('');
-                            setSelectPriority('');
-                        }}>
-                            <i className="fa-solid fa-add"></i>  &nbsp; {isEdit ? "Ugdate" : "Add Task"}
-                        </button>
+                                    addTask(
+                                        {
+                                            task,
+                                            selectedDate,
+                                            selectedTime,
+                                            selectCatogory,
+                                            selectPriority
+                                        }
+                                    );
 
+                                setTast('');
+                                setSelectCatogory('');
+                                setSelectPriority('');
+                            }}>
+                                <i className="fa-solid fa-add"></i>  &nbsp; {isEdit ? "Ugdate" : "Add Task"}
+                            </button>
+
+                        </div>
                     </div>
                 </div>
             </div>
