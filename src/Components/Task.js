@@ -1,7 +1,7 @@
 import React from 'react';
 import './ToDoList.css';
 
-export default function Task({ taskData, data }) {
+export default function Task({ taskData, data, deleteData }) {
     const render = taskData.map((task) => {
         const formattedDate = new Date(task.date).toISOString().split('T')[0];
         return (
@@ -15,7 +15,11 @@ export default function Task({ taskData, data }) {
                 <div className='task-date'>{formattedDate}</div>
                 <div className='task-time'>{task.time}</div>
                 <div className='task-actions'>
-                    <button className='delete-btn'>✖</button>
+                    <button className='delete-btn' onClick={() => deleteData(
+                        {
+                            _id: task._id
+                        }
+                    )}>✖</button>
                     <button className='edit-btn' onClick={() => data(
                         {
                             _id: task._id,
