@@ -12,7 +12,7 @@ function App() {
   const [selectData, setData] = useState({})
   const [isEdit, setIsEdit] = useState(false);
 
-  //getTask
+  //Add Task
 
   useEffect(() => {
     getTask();
@@ -55,7 +55,7 @@ function App() {
   }
 
 
-  //Update USer
+  //Update Task
 
   const updateTask = (dataa) => {
 
@@ -82,6 +82,28 @@ function App() {
       })
   }
 
+  //Delete Task
+
+  const deleteTask = (deleteData) => {
+    // Show confirmation dialog
+    const isConfirmed = window.confirm("Are you sure you want to delete this task?");
+
+    // If user confirms, proceed with deletion
+    if (isConfirmed) {
+      axios
+        .delete(`http://localhost:3001/api/deleteTask`, { params: { _id: deleteData._id } }) // Use `params` instead of `data`
+        .then(() => {
+          getTask(); // Refresh the task list after deletion
+        })
+        .catch((err) => {
+          console.error("Axios Error: ", err);
+        });
+    } else {
+      console.log("Task deletion was canceled.");
+    }
+  };
+
+
 
 
   return (
@@ -90,7 +112,7 @@ function App() {
       <Task taskData={taskData} data={data => {
         setData(data);
         setIsEdit(true);
-      }} />
+      }} deleteData={deleteTask} />
     </div>
   );
 }
